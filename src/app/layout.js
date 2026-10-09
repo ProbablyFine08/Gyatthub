@@ -1,14 +1,17 @@
 import "./globals.css";
+import AppShell from "../components/AppShell";
 
 export const metadata = {
   title: "Framework Buddy",
-  description: "A beginner-friendly dashboard for exploring frameworks and learning with AI guidance.",
+  description: "Learn programming frameworks with beginner-friendly guides and tools.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AppShell>{children}</AppShell>
+      </body>
     </html>
   );
 }
