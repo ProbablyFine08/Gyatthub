@@ -1,4 +1,4 @@
-export async function askAI(prompt: string) {
+export async function askAI(prompt) {
   const response = await fetch(
     "http://localhost:11434/api/generate",
     {

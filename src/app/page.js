@@ -1,3 +1,7 @@
+const navbar = [
+  {label: "Lessons", href: "/lessons.js"},
+]
+
 const navItems = [
   { label: "Home", active: true, icon: "⌂" },
   { label: "Explore Frameworks", active: false, icon: "◎" },
