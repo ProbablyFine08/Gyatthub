@@ -76,6 +76,16 @@ button {
   gap: 14px;
   margin-bottom: 24px;
 }
+#brand-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 100dvw;
+  width: 15dvw;
+  height: auto;
+  border-radius: 180px;
+}
+
 
 .brand-mark {
   width: 42px;
@@ -550,6 +560,14 @@ select {
   gap: 12px;
   margin: 0 0 36px;
   color: #f4f7f6;
+}
+
+.brand-image {
+  display: block;
+  width: 100%;
+  max-width: 216px;
+  height: auto;
+  border-radius: 8px;
 }
 
 .brand-row:hover {
@@ -1243,6 +1261,40 @@ select {
   font-weight: 400;
 }
 
+.project-disclosure {
+  margin: 16px 0 0;
+  border-top: 1px solid #e8ebe9;
+}
+
+.project-disclosure > div {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1fr);
+  gap: 18px;
+  padding: 13px 0;
+  border-bottom: 1px solid #e8ebe9;
+}
+
+.project-disclosure dt {
+  color: #252c28;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.project-disclosure dd {
+  margin: 0;
+  color: #4d5752;
+  font-size: 13px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.project-disclosure dd a {
+  color: #176c47;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -1365,6 +1417,10 @@ select {
     height: 34px;
     flex-basis: 34px;
     border-radius: 9px;
+  }
+
+  .brand-image {
+    width: 142px;
   }
 
   .brand-name {
@@ -1490,6 +1546,11 @@ select {
   .docs-framework-links a {
     align-items: flex-start;
     flex-direction: column;
+    gap: 5px;
+  }
+
+  .project-disclosure > div {
+    grid-template-columns: 1fr;
     gap: 5px;
   }
 }
