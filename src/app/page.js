@@ -60,7 +60,9 @@ export default function Home() {
                   </span>
                   <div className="message-content">
                     {msg.role === "ai" ? (
-                      <p className="ai-text">{msg.content}</p>
+                      <div className="ai-code-block">
+                        <p className="ai-text">{msg.content}</p>
+                      </div>
                     ) : (
                       <p>{msg.content}</p>
                     )}

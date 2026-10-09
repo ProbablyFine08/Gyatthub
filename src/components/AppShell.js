@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import brandLogo from "./img/favicon.svg";
@@ -12,6 +13,22 @@ const navigation = [
 
 export default function AppShell({ children }) {
   const pathname = usePathname();
+  const [isConnected, setIsConnected] = useState(false);
+  const [showGuide, setShowGuide] = useState(false);
+
+  useEffect(() => {
+    async function checkConnection() {
+      try {
+        const response = await fetch("http://localhost:11434/api/tags");
+        if (response.ok) setIsConnected(true);
+      } catch (e) {
+        setIsConnected(false);
+      }
+    }
+    checkConnection();
+    const interval = setInterval(checkConnection, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="app-shell">
@@ -43,16 +60,48 @@ export default function AppShell({ children }) {
         <section className="local-ai-panel" aria-label="Local AI connection status">
           <div className="local-ai-header">
             <span className="label">Local AI</span>
-            <span className="status-chip disconnected">
-              <span className="status-ring" aria-hidden="true" />
-              Not Connected
-            </span>
+            <button
+              onClick={() => !isConnected && setShowGuide(true)}
+              className={`status-chip ${isConnected ? "" : "disconnected"}`}
+              style={{ background: 'none', border: 'none', cursor: isConnected ? 'default' : 'pointer', textAlign: 'center' }}
+            >
+              <span className={`status-ring ${isConnected ? 'connected' : ''}`} aria-hidden="true" />
+              {isConnected ? "Connected" : "Not Connected"}
+            </button>
           </div>
-          <p>Connect a local model to enable AI responses.</p>
+          <p>{isConnected ? "Local model is active and ready." : "Click 'Not Connected' to learn how to set up."}</p>
         </section>
       </aside>
 
-      <div className="app-content">{children}</div>
+      <div className="app-content">
+        {showGuide && (
+          <div className="setup-modal-overlay" onClick={() => setShowGuide(false)}>
+            <div className="setup-modal" onClick={(e) => e.stopPropagation()}>
+              <h2>🚀 Connect Your Local AI</h2>
+              <p>To use Framework Buddy, you need to run a local LLM using Ollama.</p>
+
+              <div className="setup-steps">
+                <div className="step">
+                  <strong>1. Install Ollama</strong>
+                  <p>Download and install from <a href="https://ollama.com" target="_blank" rel="noreferrer">ollama.com</a></p>
+                </div>
+                <div className="step">
+                  <strong>2. Download the Model</strong>
+                  <p>Run this in your terminal: <code>ollama run phi3</code></p>
+                </div>
+                <div className="step">
+                  <strong>3. Enable Browser Access (CORS)</strong>
+                  <p>Run this command to allow the website to talk to Ollama:</p>
+                  <code className="command-block">$env:OLLAMA_ORIGINS="*"; ollama serve</code>
+                </div>
+              </div>
+
+              <button className="primary-button" onClick={() => setShowGuide(false)}>I've done this!</button>
+            </div>
+          </div>
+        )}
+        {children}
+      </div>
     </div>
   );
 }
