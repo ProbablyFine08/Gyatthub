@@ -16,6 +16,7 @@ const examplePrompts = [
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function submitPrompt(event) {
     event.preventDefault();
@@ -23,14 +24,17 @@ export default function Home() {
 
     if (!message) return;
 
-    setMessages((currentMessages) => [...currentMessages, message]);
+    setMessages((currentMessages) => [...currentMessages, { role: "user", content: message }]);
     setPrompt("");
+    setIsLoading(true);
 
     try {
       const response = await askAI(message);
-      setMessages((currentMessages) => [...currentMessages, `AI: ${response}`]);
+      setMessages((currentMessages) => [...currentMessages, { role: "ai", content: response }]);
     } catch (error) {
-      setMessages((currentMessages) => [...currentMessages, "Error: Could not connect to local AI. Make sure Ollama is running."]);
+      setMessages((currentMessages) => [...currentMessages, { role: "ai", content: "Error: Could not connect to local AI. Make sure Ollama is running." }]);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -49,12 +53,28 @@ export default function Home() {
         <section className="chat-section" aria-label="Ask Framework Buddy">
           {messages.length > 0 && (
             <div className="message-list" aria-live="polite" aria-label="Your messages">
-              {messages.map((message, index) => (
-                <article className="user-message" key={`${index}-${message}`}>
-                  <span className="message-avatar" aria-hidden="true">Y</span>
-                  <p>{message}</p>
+              {messages.map((msg, index) => (
+                <article className={`message ${msg.role === "user" ? "user-message" : "ai-message"}`} key={index}>
+                  <span className="message-avatar" aria-hidden="true">
+                    {msg.role === "user" ? "Y" : "B"}
+                  </span>
+                  <div className="message-content">
+                    {msg.role === "ai" ? (
+                      <p className="ai-text">{msg.content}</p>
+                    ) : (
+                      <p>{msg.content}</p>
+                    )}
+                  </div>
                 </article>
               ))}
+              {isLoading && (
+                <article className="ai-message">
+                  <span className="message-avatar" aria-hidden="true">B</span>
+                  <div className="message-content">
+                    <p className="ai-text loading-text">Framework Buddy is thinking...</p>
+                  </div>
+                </article>
+              )}
             </div>
           )}
 
