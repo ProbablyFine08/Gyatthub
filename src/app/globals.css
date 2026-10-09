@@ -754,6 +754,7 @@ select {
 
 .app-content {
   min-width: 0;
+  background-color: var(--bg-page);
 }
 
 .page-panel {
@@ -785,7 +786,7 @@ select {
 
 .home-heading .eyebrow {
   margin-bottom: 18px;
-  color: var(--green);
+  color: #73d59b;
   font-weight: 700;
 }
 
@@ -978,7 +979,7 @@ select {
 
 .text-link,
 .framework-card-link {
-  color: #176c47;
+  color: #73d59b;
   font-size: 13px;
   font-weight: 700;
 }
@@ -1082,7 +1083,7 @@ select {
 
 .page-heading .eyebrow {
   margin-bottom: 11px;
-  color: var(--green);
+  color: var(--text-secondary);
   font-weight: 700;
 }
 
@@ -1167,8 +1168,8 @@ select {
 
 .docs-page {
   min-height: 100vh;
-  background: #fff;
-  color: #171a19;
+  background: var(--bg-page);
+  color: var(--text-primary);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -1182,90 +1183,51 @@ select {
   justify-content: space-between;
   gap: 20px;
   padding: 0 30px;
-  border-bottom: 1px solid #e7e9e8;
-  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--border-soft);
+  background: rgba(15, 23, 42, 0.96);
   font-size: 13px;
-}
-
-.docs-product {
-  font-weight: 700;
-}
-
-.docs-divider {
-  margin: 0 10px;
-  color: #9aa09d;
+  color: var(--text-primary);
 }
 
 .docs-header a {
-  color: #59625e;
-}
-
-.docs-layout {
-  display: grid;
-  grid-template-columns: 205px minmax(0, 720px) 170px;
-  justify-content: center;
-  gap: 44px;
-  padding: 32px 28px 80px;
-}
-
-.docs-sidebar,
-.docs-toc {
-  position: sticky;
-  top: 88px;
-  align-self: start;
-  display: grid;
-  gap: 5px;
-  max-height: calc(100vh - 110px);
-  overflow-y: auto;
-}
-
-.docs-nav-heading,
-.docs-toc > p {
-  margin: 0 0 8px;
-  color: #222725;
-  font-size: 12px;
-  font-weight: 700;
+  color: var(--text-secondary);
 }
 
 .docs-sidebar a,
 .docs-toc a {
   padding: 6px 8px;
   border-radius: 5px;
-  color: #656d69;
+  color: var(--text-secondary);
+  background-color: var(--bg-surface);
   font-size: 12px;
   line-height: 1.45;
 }
 
 .docs-sidebar a:hover,
 .docs-toc a:hover {
-  background: #f1f3f2;
-  color: #151918;
+  background: var(--bg-surface);
+  color: var(--text-primary);
 }
 
-.docs-article {
-  min-width: 0;
-  padding-bottom: 30px;
+.docs-nav-heading,
+.docs-toc > p {
+  margin: 0 0 8px;
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .docs-breadcrumb {
   display: flex;
   gap: 9px;
   margin: 4px 0 23px;
-  color: #737b77;
+  color: var(--text-secondary);
   font-size: 12px;
-}
-
-.docs-article h1 {
-  margin: 0;
-  font-size: 40px;
-  font-weight: 650;
-  letter-spacing: 0;
-  line-height: 1.15;
 }
 
 .docs-lead {
   margin: 15px 0 30px;
-  color: #68716c;
+  color: var(--text-secondary);
   font-size: 17px;
   line-height: 1.65;
 }
@@ -1273,46 +1235,30 @@ select {
 .docs-section {
   scroll-margin-top: 82px;
   padding: 25px 0 28px;
-  border-top: 1px solid #e8ebe9;
+  border-top: 1px solid var(--border-soft);
 }
 
 .docs-section h2 {
   margin: 0 0 14px;
   font-size: 23px;
   font-weight: 600;
-  letter-spacing: 0;
+  color: var(--text-primary);
 }
 
 .docs-section p,
 .docs-section li {
-  color: #3f4944;
+  color: var(--text-secondary);
   font-size: 14px;
   line-height: 1.75;
-}
-
-.docs-section ol {
-  display: grid;
-  gap: 5px;
-  margin: 13px 0 0;
-  padding-left: 22px;
 }
 
 .docs-callout {
   margin-top: 20px;
   padding: 15px 17px;
-  border-left: 3px solid #287a50;
-  background: #f3f8f4;
+  border-left: 3px solid var(--success);
+  background: rgba(34, 197, 94, 0.1);
   font-size: 13px;
-}
-
-.docs-callout p {
-  margin: 5px 0 0;
-}
-
-.docs-framework-links {
-  display: grid;
-  gap: 8px;
-  margin-top: 16px;
+  color: var(--text-secondary);
 }
 
 .docs-framework-links a {
@@ -1321,27 +1267,28 @@ select {
   justify-content: space-between;
   gap: 12px;
   padding: 12px 14px;
-  border: 1px solid #e5e9e6;
+  border: 1px solid var(--border-soft);
   border-radius: 7px;
-  color: #202622;
+  color: var(--text-primary);
   font-size: 13px;
   font-weight: 600;
+  background: var(--bg-surface);
 }
 
 .docs-framework-links a:hover {
-  border-color: #a9c6b3;
-  background: #f8fbf8;
+  border-color: var(--accent-indigo);
+  background: rgba(129, 140, 248, 0.1);
 }
 
 .docs-framework-links a span {
-  color: #68716c;
+  color: var(--text-secondary);
   font-size: 11px;
   font-weight: 400;
 }
 
 .project-disclosure {
   margin: 16px 0 0;
-  border-top: 1px solid #e8ebe9;
+  border-top: 1px solid var(--border-soft);
 }
 
 .project-disclosure > div {
@@ -1349,18 +1296,18 @@ select {
   grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1fr);
   gap: 18px;
   padding: 13px 0;
-  border-bottom: 1px solid #e8ebe9;
+  border-bottom: 1px solid var(--border-soft);
 }
 
 .project-disclosure dt {
-  color: #252c28;
+  color: var(--text-primary);
   font-size: 13px;
   font-weight: 600;
 }
 
 .project-disclosure dd {
   margin: 0;
-  color: #4d5752;
+  color: var(--text-secondary);
   font-size: 13px;
   line-height: 1.55;
   overflow-wrap: anywhere;
@@ -1491,6 +1438,70 @@ select {
   color: #e2e8f0;
   margin: 0;
 }
+
+/* Knowledge Map Styles */
+.knowledge-map-container {
+  margin-top: 40px;
+  padding: 24px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 30px;
+}
+
+.knowledge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+
+.framework-cluster {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cluster-title {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  border-left: 4px solid var(--accent-indigo);
+  padding-left: 12px;
+}
+
+.concept-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.concept-node {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.concept-node.locked {
+  background: var(--bg-sidebar-alt);
+  color: var(--text-sidebar);
+  border-color: var(--border-soft);
+  opacity: 0.6;
+}
+
+.concept-node.introduced {
+  background: var(--accent-indigo-soft);
+  color: var(--accent-indigo);
+  border-color: var(--accent-indigo);
+}
+
+.concept-node.learned {
+  background: var(--success);
+  color: white;
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+}
+
 
 .ai-message {
   display: flex;
