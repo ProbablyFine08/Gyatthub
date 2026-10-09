@@ -23,4 +23,12 @@ export const frameworks = [
     tags: ["Utility classes", "Responsive design", "Styling"],
     accent: "coral",
   },
+  {
+    slug: "docker",
+    name: "Docker",
+    category: "Containerization",
+    description: "Package applications and their dependencies into lightweight, portable containers.",
+    tags: ["Images", "Containers", "Docker Compose"],
+    accent: "sky",
+  },
 ];

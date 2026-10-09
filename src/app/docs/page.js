@@ -59,6 +59,7 @@ export default function DocsPage() {
               <a id="nextjs" href="https://nextjs.org/docs" target="_blank" rel="noreferrer">Next.js <span>Official documentation ↗</span></a>
               <a id="react" href="https://react.dev/learn" target="_blank" rel="noreferrer">React <span>Official documentation ↗</span></a>
               <a id="tailwind-css" href="https://tailwindcss.com/docs" target="_blank" rel="noreferrer">Tailwind CSS <span>Official documentation ↗</span></a>
+              <a id="docker" href="https://docs.docker.com/manuals/" target="_blank" rel="noreferrer">Docker <span>Official manuals ↗</span></a>
             </div>
           </section>
 
@@ -71,24 +72,28 @@ export default function DocsPage() {
             <h2>Project disclosure</h2>
             <dl className="project-disclosure">
               <div>
-                <dt>Models used</dt>
-                <dd>Copilot and Claude</dd>
+                <dt>AI model</dt>
+                <dd>Phi-3, served as the <code>gyatthub-tutor</code> model</dd>
               </div>
               <div>
-                <dt>Framework</dt>
-                <dd>Next.js, SQLite, Ollama, Phi-3</dd>
+                <dt>Application framework</dt>
+                <dd>Next.js and React</dd>
               </div>
               <div>
-                <dt>APIs and cloud services</dt>
-                <dd>None</dd>
+                <dt>AI runtime and API</dt>
+                <dd>Ollama's local API at <code>localhost:11434</code>; no cloud AI service</dd>
+              </div>
+              <div>
+                <dt>Progress storage</dt>
+                <dd>Browser localStorage</dd>
               </div>
               <div>
                 <dt>Existing code and assets</dt>
                 <dd><a style={{ color: '#73d59b' }} href="https://github.com/ProbablyFine08/Gyatthub" target="_blank" rel="noreferrer">Framework Buddy repository <span aria-hidden="true">↗</span></a></dd>
               </div>
               <div>
-                <dt>AI development tools</dt>
-                <dd>Nada</dd>
+                <dt>AI development tool</dt>
+                <dd>Claude Code</dd>
               </div>
             </dl>
           </section>

@@ -19,36 +19,37 @@ export default function Home() {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [metrics, setMetrics] = useState(null);
+  const [suggestedPrompts, setSuggestedPrompts] = useState([]);
 
   useEffect(() => {
     setMetrics(getLearningState().metrics);
-  }, []);
 
-  const getSuggestedPrompts = () => {
-    const state = getLearningState();
-    const learned = Object.keys(state.knowledgeMap.concepts);
+    const generatePrompts = () => {
+      const state = getLearningState();
+      const learned = Object.keys(state.knowledgeMap.concepts);
 
-    const allPossiblePrompts = [];
-    frameworks.forEach(f => {
-      f.tags.forEach(tag => {
-        if (!learned.includes(tag)) {
-          allPossiblePrompts.push(`Can you explain how ${tag} works in ${f.name}?`);
-        }
+      const allPossiblePrompts = [];
+      frameworks.forEach(f => {
+        f.tags.forEach(tag => {
+          if (!learned.includes(tag)) {
+            allPossiblePrompts.push(`Can you explain how ${tag} works in ${f.name}?`);
+          }
+        });
       });
-    });
 
-    const fallbacks = [
-      "How do I get started with my first project?",
-      "What is the best way to organize a Next.js folder?",
-      "Can you explain the relationship between React and Next.js?",
-      "Teach me a pro tip for Tailwind CSS."
-    ];
+      const fallbacks = [
+        "How do I get started with my first project?",
+        "What is the best way to organize a Next.js folder?",
+        "Can you explain the relationship between React and Next.js?",
+        "Teach me a pro tip for Tailwind CSS."
+      ];
 
-    const pool = allPossiblePrompts.length > 0 ? allPossiblePrompts : fallbacks;
-    return [...pool].sort(() => 0.5 - Math.random()).slice(0, 4);
-  };
+      const pool = allPossiblePrompts.length > 0 ? allPossiblePrompts : fallbacks;
+      setSuggestedPrompts([...pool].sort(() => 0.5 - Math.random()).slice(0, 4));
+    };
 
-  const suggestedPrompts = getSuggestedPrompts();
+    generatePrompts();
+  }, []);
 
   async function submitPrompt(event) {
     event.preventDefault();

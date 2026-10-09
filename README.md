@@ -1,211 +1,159 @@
-Gyatthub
+# Gyatthub — Framework Buddy
 
-A 24hr project for appbuilders
+**Learn frameworks. Build with confidence.**
 
-Theme: Local AI
+Gyatthub is a local-AI learning companion built as a 24-hour AppBuilders project. It combines a framework directory, a chat interface backed by Ollama, a knowledge map, and a built-in guide.
 
-# 🧠 Gyatthub — Framework Buddy
+## What it does
 
-## Learn frameworks. Build with confidence.
+- **Explore frameworks:** Browse Next.js, React, Tailwind CSS, and Docker. Search by framework name, category, description, or topic, and filter by topic.
+- **Ask the local tutor:** Send questions to an Ollama model running on your computer. The tutor is configured to explain concepts in small steps, connect them to prior concepts, and ask a check-for-understanding question.
+- **View a knowledge map:** See topic tags grouped by framework and review the progress data saved by the app.
+- **Read the guide:** Find usage information and links to official framework documentation.
 
-Gyatthub is a framework-learning companion designed to help beginners explore modern web development through organized learning resources, guided prompting, and an intuitive interface. It helps users discover concepts related to React, Next.js, and Tailwind CSS.
+The project is a prototype and some learning-progress features are still incomplete; see [Limitations](#limitations).
 
+## Prompting tips: CLEAR
 
-## 📌 Overview
+CLEAR is a suggested way to write focused questions; it is guidance in this README, not an automated feature of the app.
 
-Learning a programming framework can mean jumping between tutorials, documentation pages, and forum posts. Framework Buddy aims to make that process more approachable by helping users ask better questions and understand answers in context.
-
-Rather than treating AI as a tool that only generates code, Framework Buddy emphasizes prompting as a learning skill: provide context, ask a focused question, review the explanation, and verify the result.
-
-The project is designed around local AI integration. When connected to a compatible local model, AI requests can be processed on the user's device. If no local model is connected, the interface may remain in preview/offline mode and AI responses may not be available.
-
-## ❗ The Problem
-
-- Information overload: Beginners often have to search through long documentation pages to find one relevant answer.
-- Unclear prompts: Broad questions tend to produce answers that are too generic to be useful.
-- Fragmented learning: It can be difficult to keep track of topics studied, useful explanations, and next steps.
-- Privacy concerns: Sending code or learning questions to a cloud AI service may be unsuitable for some users.
-
-## 💡 Our Solution
-
-Framework Buddy brings framework exploration and structured prompting into one learning experience. The project focuses on three ideas:
-
-1. Guided framework learning -  explore topics such as React, Next.js, and Tailwind CSS.
-2. Better prompting -  use a simple framework to make questions more specific and actionable.
-3. Local-first AI -  connect to an AI model running locally, reducing the need to send prompts and code to an external AI provider.
-
-The goal is to help learners understand *why* a solution works, not only copy code.
-
-## Prompting Philosophy: CLEAR
-
-Framework Buddy uses the *CLEAR* framework as a guide for writing more useful prompts.
-
-| Letter | Meaning | What to include |
-| --- | --- | --- |
-| *C* | Context | Explain what you are building and your experience level. |
-| *L* | Language or framework | Name the language, library, framework, and relevant version. |
-| *E* | Example | Share a small, relevant code snippet or example when useful. |
-| *A* | Ask | Ask one specific question at a time. |
-| *R* | Review | Ask for an explanation and verify the answer against reliable documentation. |
-
-*Example of a clearer prompt*
-
-I'm a beginner building a small React task list. I'm using functional components and `useState`. Why does my list reset when I refresh the page? Explain the cause first, then suggest a beginner-friendly solution.
-
-
-CLEAR is a prompting guide, not a guarantee that every AI answer will be correct.
-
-## ✨ Features
-🔍 Framework Exploration
-- Browse available frameworks through the framework directory.
-- Search by framework name, description, or topic.
-- Filter frameworks using topic tags.
-- Open framework cards to access related learning information.
-- Visit official documentation for further study.
-
-## 💬 AI Chat Interface
-1. Select example prompts to populate the message composer.
-2. Write questions about React, Next.js, Tailwind CSS, and related concepts.
-3. Submit non-empty prompts and display them in the conversation interface.
-
-## 📖 Built-in Guide
-- Learn how to navigate Framework Buddy.
-- Understand how to use the framework directory and chat interface.
-- Review the application's available features and limitations.
-
-## 🔌 Local AI Status
-- View the local AI connection status in the sidebar.
-- See the Not Connected status when no model connection has been established.
-
-## How It Works
-
-At a high level, the application is intended to follow this flow:
-
-text
-User
-  |
-  v
-Framework Buddy UI
-  |
-  v
-Prompt input and CLEAR guidance
-  |
-  v
-Local AI connection (for example, Ollama)
-  |
-  v
-Model generates an explanation
-  |
-  v
-Answer displayed in the learning interface
-
-
-## 🛠️ Technology Stack
-
-The project identifies the following technologies:
-
-| Technology | Purpose |
+| Letter | Include |
 | --- | --- |
-| Next.js | Web application framework |
-| SQLite | Database technology |
-| Ollama | Intended local AI runtime |
-| Phi-3 | Intended AI model |
+| **C — Context** | What you are building and your experience level |
+| **L — Language or framework** | The language, library, framework, and relevant version |
+| **E — Example** | A small relevant code sample, when useful |
+| **A — Ask** | One specific question |
+| **R — Review** | Ask for an explanation and check it against reliable documentation |
 
-## Getting Started
+For example: “I'm a beginner building a React task list with functional components and `useState`. Why does my list reset when I refresh the page? Explain the cause, then suggest a beginner-friendly solution.”
 
-### Prerequisites
+AI-generated answers can be wrong; verify important details and test suggested code.
 
-- [Node.js](https://nodejs.org/) 18 or later, if required by the project.
-- npm (included with Node.js) or the package manager used by this repository.
-- [Ollama](https://ollama.com/) if the app's local AI integration uses Ollama.
-- A compatible local model downloaded through the chosen runtime. 
+## Requirements
 
-### 1. Clone the repository
+- Node.js 20.9 or later and npm
+- [Ollama](https://ollama.com/download) for local AI chat
+- Enough memory and disk space to run the Phi-3 model locally
 
-Replace the placeholder URL with your actual GitHub repository URL.
+Without Ollama, you can still start the web app and use its framework directory and guide, but AI chat will not be available.
 
-git clone https://github.com/<your-username>/framework-buddy.git
-cd framework-buddy
+## Run locally
 
-### 2. Install dependencies
+Clone this repository and install its dependencies:
 
+```sh
+git clone https://github.com/ProbablyFine08/adsfas.git
+cd adsfas
 npm install
+```
 
-Use the package manager and lockfile already present in the repository if they differ.
+### Prepare the Ollama model
 
-### 3. Start a local model (Ollama example)
+The app requests the Ollama model named `gyatthub-tutor`. The repository's [`ollama/Modelfile`](./ollama/Modelfile) defines that model using `phi3` as its base.
 
-Install Ollama, then download a model supported by your machine. For example:
+1. Install Ollama and make sure its service is running.
+2. Download the base model and create the app's custom model:
 
-ollama pull qwen2.5-coder:3b
+   ```sh
+   ollama pull phi3
+   ollama create gyatthub-tutor -f ./ollama/Modelfile
+   ```
 
-Start the Ollama service if it is not already running:
+3. Allow the browser app's local origin to access Ollama. For local development on Windows PowerShell, set the origin before starting the Ollama service:
 
-ollama serve
+   ```powershell
+   $env:OLLAMA_ORIGINS="http://localhost:3000"; ollama serve
+   ```
 
-Model availability and hardware requirements vary. Choose a model that your computer can run comfortably.
+   On macOS or Linux, use:
 
-### 4. Configure local access
+   ```sh
+   OLLAMA_ORIGINS=http://localhost:3000 ollama serve
+   ```
 
-If the browser app calls Ollama directly, configure Ollama's allowed origins for your development URL according to the official Ollama documentation and your operating system. For example, the development origin may be http://localhost:3000.
+   If Ollama is already running as a background or desktop service, configure this environment variable for that service and restart it. This app calls Ollama directly from the browser, so the browser origin must be allowed. Allow only the origin you use for development; do not expose the Ollama service to untrusted networks.
 
-Do not assume a particular CORS setting is required until you confirm how this project connects to Ollama. Avoid exposing the local model service to public networks unless you understand and have secured that configuration.
+### Start the app
 
-### 5. Run the development server
+In another terminal, from the repository directory:
 
+```sh
 npm run dev
+```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000). The sidebar checks whether the local Ollama service responds and updates its status periodically. A “Connected” status means the service responded; it does not confirm that the `gyatthub-tutor` model is installed or that a chat request will succeed.
 
-If the repository uses different scripts, check package.json and use the documented command for the project.
+## How it works
 
-## Usage
+The Next.js client sends chat requests from the browser to Ollama at `http://localhost:11434/api/chat`, using the `gyatthub-tutor` model. The tutor's base model, behavior, and sampling settings are defined in `ollama/Modelfile` and `src/lib/ai/ollama.js`. The frontend and Ollama must run on the same device for the default local address to work.
 
-1. Open Framework Buddy in your browser.
-2. Explore an available framework or learning topic.
-3. Write a focused question using the CLEAR prompting guide.
-4. If local AI is configured, confirm that the local model is available before requesting a response.
-5. Review the explanation and test any suggested code in your own development environment.
-6. Verify framework-specific guidance against official documentation.
-7. Save lessons or review progress if those features are available in the current build.
+Learning data is stored in the browser's `localStorage` under `framework_buddy_learning_state`. It is specific to the browser and device; it is not stored in SQLite or synchronized to an account. Chat messages are held in page state and do not persist after the page is reloaded.
+
+## Application pages
+
+- `/` — Chat with the tutor, choose example prompts, and browse featured frameworks.
+- `/explore` — Search and filter the framework directory.
+- `/knowledge-map` — View topic tags grouped by framework.
+- `/docs` — Read the in-app guide and open official documentation links.
+
+## Technology and project structure
+
+| Technology | Use in this repository |
+| --- | --- |
+| Next.js 16 and React 19 | Web application and client UI |
+| Ollama | Local model runtime and chat API |
+| Phi-3 | Base model for the `gyatthub-tutor` Ollama model |
+| Browser `localStorage` | Local learning-progress data |
+| Claude Code | AI-assisted development tool used for this project |
+
+```text
+ollama/Modelfile           Ollama model configuration
+src/app/                   App Router pages and global styles
+src/components/            Shared UI components and app shell
+src/lib/ai/ollama.js       Local Ollama chat integration
+src/lib/frameworks.js      Framework directory data
+src/lib/metrics/store.js   Browser learning-progress storage
+```
+
+There is no application database, server-side AI proxy, or cloud AI integration configured in this repository.
+
+## Available npm scripts
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Create a production build |
+| `npm run start` | Serve a production build |
 
 ## Limitations
 
-- AI-generated code and explanations may contain errors or outdated information.
-- Small local models may struggle with complex reasoning or large codebases.
-- Local inference speed and model quality depend on the user's hardware and selected model.
-- AI features may be unavailable while the local runtime is disconnected.
-- Framework Buddy is a learning aid and does not replace official documentation or careful testing.
+- Chat requires the local Ollama service, browser access to that service, and the `gyatthub-tutor` model. Local model speed and answer quality depend on the model and hardware.
+- Chat history is temporary and disappears when the page reloads.
+- Learning progress is stored only in the current browser's local storage.
+- Progress tracking is an early implementation: the chat records framework names mentioned in prompts, while the Knowledge Map displays framework topic tags. These do not yet line up as a complete topic-by-topic learning tracker.
+- The sidebar reports whether Ollama responds, not whether the configured tutor model is available.
+- AI-generated explanations may be inaccurate or out of date. Verify framework-specific instructions with the official documentation and test code before relying on it.
 
+## Official documentation
 
-## 📚 Official Documentation
+- [Next.js](https://nextjs.org/docs)
+- [React](https://react.dev/learn)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [Docker Manuals](https://docs.docker.com/manuals/)
+- [Ollama](https://docs.ollama.com/)
 
-Explore these resources to learn directly from the framework maintainers.
+## Project team
 
-- Next.js Documentation
-- React Learn
-- Tailwind CSS Documentation
-- Ollama Documentation
-
-## Team
-
-| Name | Role | GitHub |
-| --- | --- | --- |
-| [Micah Garcia] | [Role] | [@handle](https://github.com/handle) |
-| [Carl John Galleto] | [Role] | [@handle](https://github.com/handle) |
-| [Rheamil Nacario] | [Role] | [@handle](https://github.com/handle) |
-
+- Micah Garcia
+- Carl John Galleto
+- Rheamil Nacario
 
 ## License
 
-This project is intended to use the MIT License. Add a LICENSE file containing the license text before presenting the repository as officially licensed under MIT. (babaguhin pa ito shaaa)
+There is no `LICENSE` file in this repository, so no open-source license is currently declared. Add the appropriate license file before describing the project as MIT-licensed.
 
 ## Acknowledgements
 
-- The organizers, mentors, and participants of [AppBuildersPH Hackathon].
-- The teams behind Next.js, React, Tailwind CSS, and Ollama.
+- The organizers, mentors, and participants of the AppBuildersPH Hackathon.
+- The teams behind Next.js, React, Tailwind CSS, Docker, Ollama, and Phi-3.
 - The open-source community and tools that support local AI development.
-
----
-
-*Built to make prompting more intentional and framework learning more approachable—with local AI at the center.*
