@@ -3,7 +3,7 @@ const sections = [
   { id: "ask-a-question", label: "Ask a question" },
   { id: "explore-frameworks", label: "Explore frameworks" },
   { id: "local-ai", label: "Local AI status" },
-  { id: "built-with", label: "About this project" },
+  { id: "built-with", label: "Project disclosure" },
 ];
 
 export const metadata = {
@@ -68,8 +68,29 @@ export default function DocsPage() {
           </section>
 
           <section id="built-with" className="docs-section">
-            <h2>About this project</h2>
-            <p>GitHub Copilot and Claude were used as development tools to help create the Framework Buddy web app. They are not connected to the app's chat experience.</p>
+            <h2>Project disclosure</h2>
+            <dl className="project-disclosure">
+              <div>
+                <dt>Models used</dt>
+                <dd>Copilot and Claude</dd>
+              </div>
+              <div>
+                <dt>Framework</dt>
+                <dd>Next.js, SQLite, Ollama, Phi-3</dd>
+              </div>
+              <div>
+                <dt>APIs and cloud services</dt>
+                <dd>None</dd>
+              </div>
+              <div>
+                <dt>Existing code and assets</dt>
+                <dd><a href="https://github.com/ProbablyFine08/Gyatthub" target="_blank" rel="noreferrer">Framework Buddy repository <span aria-hidden="true">↗</span></a></dd>
+              </div>
+              <div>
+                <dt>AI development tools</dt>
+                <dd>Nada</dd>
+              </div>
+            </dl>
           </section>
         </article>
 

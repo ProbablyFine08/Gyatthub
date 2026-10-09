@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import brandLogo from "./img/favicon.svg";
 
 const navigation = [
   { label: "Home", href: "/", icon: "⌂" },
@@ -17,11 +18,7 @@ export default function AppShell({ children }) {
       <aside className="sidebar" aria-label="Framework Buddy sidebar">
         <div className="sidebar-top">
           <Link className="brand-row" href="/">
-            <span className="brand-mark" aria-hidden="true">F</span>
-            <span>
-              <span className="eyebrow">AI learning</span>
-              <span className="brand-name">Framework Buddy</span>
-            </span>
+            <img id="brand-image" src={brandLogo.src} alt="Framework Buddy" />
           </Link>
 
           <nav className="nav-list" aria-label="Main navigation">
