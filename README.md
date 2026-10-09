@@ -42,8 +42,8 @@ Without Ollama, you can still start the web app and use its framework directory 
 Clone this repository and install its dependencies:
 
 ```sh
-git clone https://github.com/ProbablyFine08/adsfas.git
-cd adsfas
+git clone https://github.com/ProbablyFine08/Gyatthub.git
+cd Gyatthub
 npm install
 ```
 
