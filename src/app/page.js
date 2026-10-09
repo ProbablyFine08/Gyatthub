@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import FrameworkCard from "../components/FrameworkCard";
 import { frameworks } from "../lib/frameworks";
 import { askAI } from "../lib/ai/ollama";
+import { getLearningState, incrementQuestionCount, markMilestone, trackFramework, markConcept } from "../lib/metrics/store";
 
 const examplePrompts = [
   "Explain how Next.js App Router works.",
@@ -17,6 +18,11 @@ export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [metrics, setMetrics] = useState(null);
+
+  useEffect(() => {
+    setMetrics(getLearningState().metrics);
+  }, []);
 
   async function submitPrompt(event) {
     event.preventDefault();
@@ -31,6 +37,23 @@ export default function Home() {
     try {
       const response = await askAI(message);
       setMessages((currentMessages) => [...currentMessages, { role: "ai", content: response }]);
+
+      // Track Learning Progress
+      const newCount = incrementQuestionCount();
+      setMetrics(prev => prev ? { ...prev, totalQuestions: newCount } : null);
+
+      // Basic Framework Detection
+      frameworks.forEach(f => {
+        if (message.toLowerCase().includes(f.name.toLowerCase())) {
+          trackFramework(f.slug);
+          markConcept(f.name, "introduced");
+        }
+      });
+
+      // Milestone Detection (Pedagogical Check)
+      if (response.includes("Check for Understanding") || response.includes("Does that make sense?")) {
+        // Future: Track that a CFU was asked
+      }
     } catch (error) {
       setMessages((currentMessages) => [...currentMessages, { role: "ai", content: "Error: Could not connect to local AI. Make sure Ollama is running." }]);
     } finally {
@@ -45,12 +68,12 @@ export default function Home() {
           <p className="eyebrow muted">Your framework learning companion</p>
           <h1>Learn frameworks.<br />Build with confidence.</h1>
           <p className="home-subtitle">
-            Framework Buddy helps beginners learn modern programming frameworks with
+            Gyatthub helps beginners learn modern programming frameworks with
             clear, practical guidance, one question at a time.
           </p>
         </header>
 
-        <section className="chat-section" aria-label="Ask Framework Buddy">
+        <section className="chat-section" aria-label="Ask Gyatthub">
           {messages.length > 0 && (
             <div className="message-list" aria-live="polite" aria-label="Your messages">
               {messages.map((msg, index) => (
@@ -60,7 +83,9 @@ export default function Home() {
                   </span>
                   <div className="message-content">
                     {msg.role === "ai" ? (
-                      <p className="ai-text">{msg.content}</p>
+                      <div className="ai-code-block">
+                        <p className="ai-text">{msg.content}</p>
+                      </div>
                     ) : (
                       <p>{msg.content}</p>
                     )}
@@ -71,7 +96,7 @@ export default function Home() {
                 <article className="ai-message">
                   <span className="message-avatar" aria-hidden="true">B</span>
                   <div className="message-content">
-                    <p className="ai-text loading-text">Framework Buddy is thinking...</p>
+                    <p className="ai-text loading-text">Gyatthub is thinking...</p>
                   </div>
                 </article>
               )}
