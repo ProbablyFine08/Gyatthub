@@ -1,8 +1,8 @@
 :root {
   --bg-page: #0f172a;
   --bg-surface: #1e293b;
-  --bg-sidebar: #0f172a;
-  --bg-sidebar-alt: #020617;
+  --bg-sidebar: #101923;
+  --bg-sidebar-alt: #0f172a;
   --bg-muted: #1e293b;
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
@@ -60,7 +60,7 @@ button {
 
 .sidebar {
   width: clamp(240px, 18vw, 290px);
-  background: linear-gradient(180deg, var(--bg-sidebar) 0%, var(--bg-sidebar-alt) 100%);
+  background-color: var(--bg-sidebar);
   color: var(--text-sidebar);
   border-radius: 28px;
   padding: clamp(20px, 3vw, 28px) clamp(12px, 2vw, 20px);
@@ -73,6 +73,7 @@ button {
 }
 
 .sidebar.collapsed {
+  flex: 0 0 80px;
   width: 80px;
   padding: clamp(20px, 3vw, 28px) 0;
   align-items: center;
@@ -113,7 +114,7 @@ button {
   color: var(--text-primary);
   display: grid;
   place-items: center;
-  margin: 0 auto 24px;
+  margin: 0 0 24px 0;
   transition: background 0.2s ease;
   cursor: pointer;
   padding: 0;
@@ -556,21 +557,21 @@ button {
 }
 
 .app-shell {
-  display: grid;
-  grid-template-columns: clamp(240px, 20vw, 280px) minmax(0, 1fr);
+  display: flex;
   min-height: 100dvh;
 }
 
 .sidebar {
+  flex: 0 0 clamp(240px, 18vw, 290px);
   position: sticky;
   top: 0;
-  width: auto;
   height: 100dvh;
   min-height: 560px;
   padding: 26px 16px 18px;
   border-radius: 0;
-  background: var(--navy);
+  background: var(--bg-sidebar);
   box-shadow: none;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), flex-basis 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sidebar-top {
@@ -773,8 +774,14 @@ button {
 }
 
 .app-content {
+  flex: 1;
   min-width: 0;
   background-color: var(--bg-page);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-content.expanded {
+  margin-left: 0;
 }
 
 .page-panel {
@@ -782,7 +789,7 @@ button {
   min-height: 100dvh;
   margin: 0 auto;
   padding: clamp(24px, 5vw, 54px) clamp(20px, 5vw, 76px) 64px;
-  background: var(--bg-page);
+  background-color: var(--bg-page);
 }
 
 .home-content {

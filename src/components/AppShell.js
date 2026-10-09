@@ -90,7 +90,7 @@ export default function AppShell({ children }) {
         </section>
       </aside>
 
-      <div className="app-content">
+      <div className={`app-content ${isCollapsed ? "expanded" : ""}`}>
         {showGuide && (
           <div className="setup-modal-overlay" onClick={() => setShowGuide(false)}>
             <div className="setup-modal" onClick={(e) => e.stopPropagation()}>
