@@ -48,7 +48,11 @@ export default function AppShell({ children }) {
             onClick={() => setIsCollapsed(!isCollapsed)}
             aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
-            <span>{isCollapsed ? "→" : "←"}</span>
+            <div className={`burger-icon ${!isCollapsed ? "open" : ""}`}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </button>
 
           <nav className="nav-list" aria-label="Main navigation">
