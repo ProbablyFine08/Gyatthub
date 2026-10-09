@@ -105,6 +105,11 @@ button {
   flex-direction: column;
 }
 
+.sidebar.collapsed .collapse-toggle {
+  margin: 0 0 24px 0;
+  justify-self: center;
+}
+
 .collapse-toggle {
   width: 32px;
   height: 32px;
@@ -118,10 +123,7 @@ button {
   transition: background 0.2s ease;
   cursor: pointer;
   padding: 0;
-}
-
-.collapse-toggle:hover {
-  background: var(--bg-sidebar-alt);
+  flex-shrink: 0;
 }
 
 .burger-icon {
