@@ -24,6 +24,32 @@ export default function Home() {
     setMetrics(getLearningState().metrics);
   }, []);
 
+  const getSuggestedPrompts = () => {
+    const state = getLearningState();
+    const learned = Object.keys(state.knowledgeMap.concepts);
+
+    const allPossiblePrompts = [];
+    frameworks.forEach(f => {
+      f.tags.forEach(tag => {
+        if (!learned.includes(tag)) {
+          allPossiblePrompts.push(`Can you explain how ${tag} works in ${f.name}?`);
+        }
+      });
+    });
+
+    const fallbacks = [
+      "How do I get started with my first project?",
+      "What is the best way to organize a Next.js folder?",
+      "Can you explain the relationship between React and Next.js?",
+      "Teach me a pro tip for Tailwind CSS."
+    ];
+
+    const pool = allPossiblePrompts.length > 0 ? allPossiblePrompts : fallbacks;
+    return [...pool].sort(() => 0.5 - Math.random()).slice(0, 4);
+  };
+
+  const suggestedPrompts = getSuggestedPrompts();
+
   async function submitPrompt(event) {
     event.preventDefault();
     const message = prompt.trim();
@@ -35,7 +61,7 @@ export default function Home() {
     setIsLoading(true);
 
     try {
-      const response = await askAI(message);
+      const response = await askAI(message, messages);
       setMessages((currentMessages) => [...currentMessages, { role: "ai", content: response }]);
 
       // Track Learning Progress
@@ -125,7 +151,7 @@ export default function Home() {
 
           {messages.length === 0 && (
             <div className="prompt-examples" aria-label="Example prompts">
-              {examplePrompts.map((example) => (
+              {suggestedPrompts.map((example) => (
                 <button key={example} type="button" onClick={() => setPrompt(example)}>
                   <span aria-hidden="true">↗</span>
                   {example}
