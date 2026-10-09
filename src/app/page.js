@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import FrameworkCard from "../components/FrameworkCard";
 import { frameworks } from "../lib/frameworks";
+import { askAI } from "../lib/ai/ollama";
 
 const examplePrompts = [
   "Explain how Next.js App Router works.",
@@ -16,7 +17,7 @@ export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [messages, setMessages] = useState([]);
 
-  function submitPrompt(event) {
+  async function submitPrompt(event) {
     event.preventDefault();
     const message = prompt.trim();
 
@@ -24,6 +25,13 @@ export default function Home() {
 
     setMessages((currentMessages) => [...currentMessages, message]);
     setPrompt("");
+
+    try {
+      const response = await askAI(message);
+      setMessages((currentMessages) => [...currentMessages, `AI: ${response}`]);
+    } catch (error) {
+      setMessages((currentMessages) => [...currentMessages, "Error: Could not connect to local AI. Make sure Ollama is running."]);
+    }
   }
 
   return (
@@ -69,10 +77,6 @@ export default function Home() {
               <span aria-hidden="true">↑</span>
             </button>
           </form>
-
-          <p className="ai-unavailable" role="status">
-            AI responses are unavailable until a local AI model is connected. Your message will appear here, but no answer is generated yet.
-          </p>
 
           {messages.length === 0 && (
             <div className="prompt-examples" aria-label="Example prompts">
