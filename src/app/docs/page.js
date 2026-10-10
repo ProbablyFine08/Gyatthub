@@ -89,7 +89,7 @@ export default function DocsPage() {
               </div>
               <div>
                 <dt>Existing code and assets</dt>
-                <dd><a style={{ color: '#73d59b' }} href="https://github.com/ProbablyFine08/Gyatthub" target="_blank" rel="noreferrer">Framework Buddy repository <span aria-hidden="true">↗</span></a></dd>
+                <dd><a style={{ color: '#73d59b' }} href="https://github.com/ProbablyFine08/Gyatthub" target="_blank" rel="noreferrer">Gyatthub repository <span aria-hidden="true">↗</span></a></dd>
               </div>
               <div>
                 <dt>AI development tool</dt>
